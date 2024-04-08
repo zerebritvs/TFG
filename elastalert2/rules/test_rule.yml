@@ -1,0 +1,19 @@
+index: suricata-*
+type: frequency
+num_events: 15
+timeframe:
+  hours: 4
+
+filter:
+- term:
+    event.action: "deny"
+
+alert:
+- "email"
+
+email:
+- "user@gmail.com"
+
+smtp_host: smtp.gmail.com
+smtp_port: 587
+smtp_auth_file: smtp_auth.yml
