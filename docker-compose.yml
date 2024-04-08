@@ -43,7 +43,7 @@ services:
           "      - localhost\n"\
           "    ip:\n"\
           "      - 127.0.0.1\n"\
-		      "      - ${CLUSTER_IP}\n"\
+          "      - ${CLUSTER_IP}\n"\
           "  - name: kibana\n"\
           "    dns:\n"\
           "      - kibana\n"\
