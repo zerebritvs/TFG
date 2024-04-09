@@ -1,12 +1,11 @@
-index: suricata-*
-type: frequency
-num_events: 15
-timeframe:
-  hours: 4
+name: Suricata Alert
+type: any
+index: ".ds-filebeat-*"
+num_events: 1
 
 filter:
 - term:
-    event.action: "deny"
+    event.kind: "alert"
 
 alert:
 - "email"
@@ -17,3 +16,20 @@ email:
 smtp_host: smtp.gmail.com
 smtp_port: 587
 smtp_auth_file: smtp_auth.yml
+email_format: "html"
+alert_text_type: alert_text_only
+alert_text:
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Alerta de Suricata</title>
+  </head>
+  <body>
+      <h1>¡Alerta de Suricata!</h1>
+      <p>Se ha detectado una alerta de Suricata en tu sistema. Por favor, revisa los detalles a continuación:</p>
+      <p>Consulta los registros para obtener más información.</p>
+  </body>
+  </html>

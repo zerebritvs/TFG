@@ -31,7 +31,7 @@ use_ssl: True
 
 # Verify TLS certificates
 verify_certs: True
-ca_certs: /opt/elastalert2/certs/ca.crt
+ca_certs: /opt/elastalert2/certs/ca/ca.crt
 
 # The index on es_host which is used for metadata storage
 # This can be a unmapped index, but it is recommended that you run
@@ -44,7 +44,7 @@ writeback_alias: elastalert_alerts
 alert_time_limit:
   days: 2
 
-# email configuration
+# Email configuration
 smtp_hosts: smtp.gmail.com
 smtp_port: 25
-from_addr: elastalert2.tfg@gmail.com
+from_addr: user@gmail.com
