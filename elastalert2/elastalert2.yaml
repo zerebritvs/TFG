@@ -11,7 +11,7 @@ run_every:
 # ElastAlert will buffer results from the most recent
 # period of time, in case some log sources are not in real time
 buffer_time:
-  minutes: 15
+  minutes: 1
 
 # The Elasticsearch hostname for metadata writeback
 # Note that every rule can have its own Elasticsearch host
@@ -20,18 +20,18 @@ es_host: elasticsearch
 # The Elasticsearch port
 es_port: 9200
 
-start_time: "now"
+  #start_time: "now"
 
 # Option basic-auth username and password for Elasticsearch
-es_username: "elastic"
-es_password: "elastic123"
+es_username: elastic
+es_password: elastic123
 
 # Connect with TLS to Elasticsearch
 use_ssl: True
 
 # Verify TLS certificates
-verify_certs: True
-ca_certs: /opt/elastalert2/certs/ca/ca.crt
+verify_certs: False
+  #ca_certs: /opt/elastalert/ca.crt
 
 # The index on es_host which is used for metadata storage
 # This can be a unmapped index, but it is recommended that you run
@@ -43,8 +43,3 @@ writeback_alias: elastalert_alerts
 # sending the alert until this time period has elapsed
 alert_time_limit:
   days: 2
-
-# Email configuration
-smtp_hosts: smtp.gmail.com
-smtp_port: 25
-from_addr: user@gmail.com

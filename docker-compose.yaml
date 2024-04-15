@@ -153,8 +153,8 @@ services:
       kibana:
         condition: service_healthy
     image: jertel/elastalert2:${ELASTALERT2_VERSION}
-    restart: always
+    restart: unless-stopped
     volumes:
-      - ./elastalert2/elastalert2.yaml:/opt/elastalert2/config.yaml
-      - ./elastalert2/rules:/opt/elastalert2/rules
-      - certs:/opt/elastalert2/certs
+      - ./elastalert2/elastalert2.yaml:/opt/elastalert/config.yaml
+      - ./elastalert2/rules:/opt/elastalert/rules
+      - ./elastalert2/smtp_auth.yaml:/opt/elastalert/smtp_auth.yaml

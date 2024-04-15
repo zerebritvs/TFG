@@ -1,0 +1,28 @@
+name: Suricata Alert
+index: ".ds-filebeat-*"
+type: any
+
+realert:
+    seconds: 0
+
+filter:
+- term:
+    suricata.eve.alert.signature_id : "2100498"
+
+alert:
+- "email"
+
+email:
+- "user@gmail.com"
+
+alert_subject:
+    - "Suricata Alert"
+
+smtp_host: "smtp.gmail.com"
+smtp_port: 465
+smtp_ssl: true
+from_addr: "user@gmail.com"
+smtp_auth_file: "/opt/elastalert/smtp_auth.yaml"
+#email_format: "html"
+#alert_text_type: alert_text_only
+#alert_text:
