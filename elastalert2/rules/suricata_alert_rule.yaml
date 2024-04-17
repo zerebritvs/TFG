@@ -13,12 +13,12 @@ alert:
 - "email"
 
 email:
-- "user@gmail.com"
+- "email@gmail.com"
 
 smtp_host: "smtp.gmail.com"
-smtp_port: 465
-smtp_ssl: true
-from_addr: "user@gmail.com"
+smtp_port: 587
+smtp_ssl: false
+from_addr: "email@gmail.com"
 smtp_auth_file: "/opt/elastalert/smtp_auth.yaml"
 
 email_format: "html"
