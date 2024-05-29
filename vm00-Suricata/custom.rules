@@ -1,0 +1,132 @@
+# SQL Injection (SQLI) Rules
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, DELETE FROM in URI"; flow:established,to_server; uricontent:"DELETE"; nocase; uricontent:"FROM"; nocase; pcre:"/DELETE.+FROM/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; classtype:web-application-attack; sid:300001; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, INSERT INTO in URI"; flow:established,to_server; uricontent:"INSERT"; nocase; uricontent:"INTO"; nocase; pcre:"/INSERT.+INTO/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; classtype:web-application-attack; sid:300002; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, SELECT FROM in URI"; flow:established,to_server; content:"SELECT"; nocase; http_uri; content:"FROM"; nocase; http_uri; pcre:"/SELECT\b.*FROM/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; classtype:web-application-attack; sid:300003; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, UNION SELECT in URI"; flow:established,to_server; uricontent:"UNION"; nocase; uricontent:"SELECT"; nocase; pcre:"/UNION.+SELECT/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; classtype:web-application-attack; sid:300004; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, UPDATE SET in URI"; flow:established,to_server; content:"UPDATE"; nocase; http_uri; content:"SET"; nocase; distance:0; http_uri; pcre:"/\WUPDATE\s+[A-Za-z0-9$_].*?\WSET\s+[A-Za-z0-9$_].*?\x3d/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; classtype:web-application-attack; sid:300005; rev:1;)
+
+alert http any any -> $HOME_NET $HTTP_PORTS (msg:"Possible SQL Injection Attempt, varchar( in URI"; flow:established,to_server; uricontent:"varchar("; nocase; classtype:web-application-attack; sid:300006; rev:5;)
+
+alert http any any -> $HOME_NET $HTTP_PORTS (msg:"Possible SQL Injection Attempt, exec( in URI"; flow:established,to_server; uricontent:"exec("; nocase; classtype:web-application-attack; sid:300007; rev:1;)
+
+alert http any any -> $HOME_NET $HTTP_PORTS (msg:"Possible SQL Injection Attempt Danmec related (declare)"; flow:established,to_server; uricontent:"DECLARE "; nocase; uricontent:"CHAR("; nocase; uricontent:"CAST("; nocase; classtype:web-application-attack; sid:300008; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection INTO OUTFILE Arbitrary File Write Attempt"; flow:established,to_server; content:"INTO"; http_uri; nocase; content:"OUTFILE"; nocase; http_uri; pcre:"/INTO.+OUTFILE/Ui"; reference:url,www.milw0rm.com/papers/372; reference:url,www.greensql.net/publications/backdoor-webserver-using-mysql-sql-injection; reference:url,websec.wordpress.com/2007/11/17/mysql-into-outfile/; classtype:web-application-attack; sid:300009; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, ALTER in URI"; flow:to_server,established; uricontent:"ALTER"; nocase; pcre:"/ALTER\ +(database|procedure|table|column)/Ui"; reference:url,www.owasp.org/index.php/SQL_Injection; reference:url,www.w3schools.com/SQl/sql_alter.asp; classtype:web-application-attack; sid:300010; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, DROP in URI"; flow:to_server,established; uricontent:"DROP"; nocase; pcre:"/DROP\ +(database|procedure|table|column)/Ui"; reference:url,www.owasp.org/index.php/SQL_Injection; reference:url,www.w3schools.com/SQl/sql_drop.asp; classtype:web-application-attack; sid:300011; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, CREATE in URI"; flow:to_server,established; uricontent:"CREATE"; nocase; pcre:"/CREATE\ +(database|procedure|table|column|directory)/Ui"; reference:url,www.owasp.org/index.php/SQL_Injection; reference:url,www.w3schools.com/Sql/sql_create_db.asp; classtype:web-application-attack; sid:300012; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Blind SQL Injection Attempt, SELECT SUBSTR/ING in URI"; flow:established,to_server; uricontent:"SELECT"; nocase; uricontent:"SUBSTR"; nocase; pcre:"/SELECT.+SUBSTR/Ui"; reference:url,www.1keydata.com/sql/sql-substring.html; reference:url,www.owasp.org/index.php/SQL_Injection; reference:url,msdn.microsoft.com/en-us/library/ms161953.aspx; classtype:web-application-attack; sid:300013; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, SHOW CHARACTER SET in URI"; flow:established,to_server; uricontent:"SHOW"; nocase; uricontent:"CHARACTER"; nocase; content:"SET"; nocase; pcre:"/SHOW.+CHARACTER.+SET/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; reference:url,dev.mysql.com/doc/refman/5.0/en/show-character-set.html; classtype:web-application-attack; sid:300014; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, SHOW VARIABLES in URI"; flow:established,to_server; uricontent:"SHOW"; nocase; uricontent:"VARIABLES"; nocase; pcre:"/SHOW.+VARIABLES/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; reference:url,dev.mysql.com/doc/refman/5.1/en/server-system-variables.html; classtype:web-application-attack; sid:300015; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, SHOW CURDATE/CURTIME in URI"; flow:established,to_server; uricontent:"SHOW"; nocase; uricontent:"CUR"; nocase; pcre:"/SHOW.+CUR(DATE|TIME)/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; reference:url,dev.mysql.com/doc/refman/5.1/en/date-and-time-functions.html#function_curdate; reference:url,dev.mysql.com/doc/refman/5.1/en/date-and-time-functions.html#function_curtime; classtype:web-application-attack; sid:300016; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, SHOW TABLES in URI"; flow:established,to_server; uricontent:"SHOW"; nocase; uricontent:"TABLES"; nocase; pcre:"/SHOW.+TABLES/Ui"; reference:url,en.wikipedia.org/wiki/SQL_injection; reference:url,dev.mysql.com/doc/refman/4.1/en/show-tables.html; classtype:web-application-attack; sid:300017; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, BULK INSERT in URI to Insert File Content into Database Table"; flow:established,to_server; content:"BULK"; nocase; http_uri; content:"INSERT"; nocase; http_uri; distance:0; reference:url,msdn.microsoft.com/en-us/library/ms188365.aspx; reference:url,msdn.microsoft.com/en-us/library/ms175915.aspx; reference:url,www.sqlteam.com/article/using-bulk-insert-to-load-a-text-file; classtype:web-application-attack; sid:300018; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, SELECT VERSION in URI"; flow:established,to_server; content:"SELECT"; nocase; http_uri; content:"VERSION"; nocase; distance:1; http_uri; reference:url,support.microsoft.com/kb/321185; classtype:web-application-attack; sid:300019; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, INSERT VALUES in URI"; flow:established,to_server; uricontent:"INSERT"; nocase; uricontent:"VALUES"; nocase; pcre:"/INSERT.+VALUES/Ui"; reference:url,ferruh.mavituna.com/sql-injection-cheatsheet-oku/; reference:url,en.wikipedia.org/wiki/Insert_(SQL); classtype:web-application-attack; sid:300020; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL Injection Attempt, SELECT CONCAT in URI"; flow:established,to_server; uricontent:"SELECT"; nocase; uricontent:"CONCAT"; nocase; pcre:"/SELECT.+CONCAT/Ui"; reference:url,ferruh.mavituna.com/sql-injection-cheatsheet-oku/; reference:url,www.webdevelopersnotes.com/tutorials/sql/a_little_more_on_the_mysql_select_statement.php3; classtype:web-application-attack; sid:300021; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible SQL injection Attempt, obfuscated via REVERSE function in URI"; flow:established,to_server; uricontent:"REVERSE"; nocase; pcre:"/[^\w]REVERSE[^\w]?\(/Ui"; reference:url,snosoft.blogspot.com/2010/05/reversenoitcejni-lqs-dnilb-bank-hacking.html; classtype:web-application-attack; sid:300022; rev:1;)
+
+# Local File Inclusion (LFI) Rules
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt, ../ in URI"; flow:to_server,established; uricontent:"../"; classtype:web-application-attack; sid:300101; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt, ....// in URI"; flow:to_server,established; uricontent:"....//"; classtype:web-application-attack; sid:300102; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt, /etc/passwd in URI"; flow:to_server,established; uricontent:"/etc/passwd"; nocase; classtype:web-application-attack; sid:300103; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt, /proc/version in URI"; flow:to_server,established; uricontent:"/proc/version"; nocase; classtype:web-application-attack; sid:300104; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt file:// in URI"; flow:to_server,established; uricontent:"file://"; nocase; classtype:web-application-attack; sid:300105; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt ..%2f in URI"; flow:to_server,established; uricontent:"..%2f"; nocase; classtype:web-application-attack; sid:300106; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt ..%252f in URI"; flow:to_server,established; uricontent:"..%252f"; nocase; classtype:web-application-attack; sid:300107; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt .. in URI"; flow:to_server,established; uricontent:".."; classtype:web-application-attack; sid:300108; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt %2e%2e/ in URI"; flow:to_server,established; uricontent:"%2e%2e/"; nocase; classtype:web-application-attack; sid:300109; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt ..%c0%af in URI"; flow:to_server,established; uricontent:"..%c0%af"; nocase; classtype:web-application-attack; sid:300110; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt %2e%2e%2f in URI"; flow:to_server,established; uricontent:"%2e%2e%2f"; nocase; classtype:web-application-attack; sid:300111; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt %252e%252e%252f in URI"; flow:to_server,established; uricontent:"%252e%252e%252f"; nocase; classtype:web-application-attack; sid:300112; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Local File Inclusion Attempt Null Byte in URI"; flow:to_server,established; uricontent:"%00"; classtype:web-application-attack; sid:300113; rev:1;)
+
+# Remote File Inclusion (RFI) Rules
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Remote File Inclusion Attempt, =http:// in URI"; flow:to_server,established; uricontent:"=http://"; nocase; classtype:web-application-attack; sid:300201; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Remote File Inclusion Attempt, =https:// in URI"; flow:to_server,established; uricontent:"=https://"; nocase; classtype:web-application-attack; sid:300202; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Remote File Inclusion Attempt, include( in URI"; flow:to_server,established; uricontent:"include("; nocase; classtype:web-application-attack; sid:300203; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Remote File Inclusion Attempt, PHP Wrapper in URI"; flow:to_server,established; uricontent:"php://"; nocase; classtype:web-application-attack; sid:300204; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Remote File Inclusion Attempt, Remote Server IP in URI"; flow:to_server,established; uricontent:"//"; uricontent:"[0-9]"; classtype:web-application-attack; sid:300205; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Remote File Inclusion Attempt, Common Remote File Extensions in URI"; flow:to_server,established; uricontent:".php"; uricontent:".asp"; uricontent:".aspx"; uricontent:".jsp"; nocase; classtype:web-application-attack; sid:300206; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Remote File Inclusion Attempt, Base64 Encoded Data in URI"; flow:to_server,established; uricontent:"data:text/plain\;base64,"; nocase; classtype:web-application-attack; sid:300207; rev:2;)
+
+# Command Injection (CI) Rules
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Command Injection Attempt, using \;"; flow:to_server,established; uricontent:"\;"; classtype:web-application-attack; sid:300301; rev:2;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Command Injection Attempt, using &&"; flow:to_server,established; uricontent:"&&"; classtype:web-application-attack; sid:300302; rev:2;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Command Injection Attempt, using ||"; flow:to_server,established; uricontent:"||"; classtype:web-application-attack; sid:300303; rev:2;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Command Injection Attempt, using $()"; flow:to_server,established; uricontent:"$()"; classtype:web-application-attack; sid:300304; rev:2;)
+
+# Brute force Rules
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Brute Force Login Attempt, 5 logins in 60 seconds"; flow:to_server,established; content:"Login"; http_uri; threshold:type limit, track by_src, count 5, seconds 60; classtype:web-application-attack; sid:300401; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Brute Force Login Attempt, Multiple Failed Attempts"; flow:to_server,established; content:"POST"; http_method; content:"/login"; http_uri; content:"HTTP/"; http_header; threshold: type threshold, track by_src, count 5, seconds 60;  classtype:web-application-attack; sid:300402; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Brute Force Login Attempt, Common Usernames"; flow:to_server,established; content:"POST"; http_method; content:"/login"; http_uri; content:"HTTP/"; http_header; pcre:"/(username=)(administrator|root|user|test)/Ui"; classtype:web-application-attack; sid:300403; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Brute Force Login Attempt, Common Passwords"; flow:to_server,established; content:"POST"; http_method; content:"/login"; http_uri; content:"HTTP/"; http_header; pcre:"/(password=)(password123|123456|admin123|qwerty)/Ui"; classtype:web-application-attack; sid:300404; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible Brute Force Login Attempt, Common Credentials"; flow:to_server,established; content:"POST"; http_method; content:"/login"; http_uri; content:"HTTP/"; http_header; pcre:"/(username=)(administrator|root|user|test)&(password=)(password123|123456|admin123|qwerty)/Ui"; classtype:web-application-attack; sid:300405; rev:1;)
+
+# Denial of Service (DoS) and Distributed Denial of Services (DDoS) Rules
+alert http any any -> $HTTP_SERVERS any (msg:"Possible HTTP GET Flood Attack"; flow:to_server; content:"GET"; http_method; threshold: type threshold, track by_src, count 50, seconds 10; classtype:denial-of-service; sid:300501; rev:1;)
+
+alert http any any -> $HTTP_SERVERS any (msg:"Possible HTTP POST Flood Attack"; flow:to_server; content:"POST"; http_method; threshold: type threshold, track by_src, count 50, seconds 10; classtype:denial-of-service; sid:300502; rev:1;)
+
+alert http any any -> $HTTP_SERVERS any (msg:"Possible HTTP HEAD Flood Attack"; flow:to_server; content:"HEAD"; http_method; threshold: type threshold, track by_src, count 50, seconds 10; classtype:denial-of-service; sid:300503; rev:1;)
+
+#alert http any any -> $HTTP_SERVERS any (msg:"Possible Large HTTP Request Flood Attack"; flow:to_server; content_length: > 100000; threshold: type threshold, track by_src, count 10, seconds 5; classtype:denial-of-service; sid:300504; rev:1;)
+
+alert tcp any any -> $HTTP_SERVERS any (msg:"Possible SYN Flood Attack"; flags:S; threshold: type threshold, track by_src, count 50, seconds 10; classtype:denial-of-service; sid:300505; rev:1;)
+
+alert udp any any -> $HTTP_SERVERS any (msg:"Possible UDP Flood Attack"; threshold: type threshold, track by_src, count 50, seconds 10; classtype:denial-of-service; sid:300506; rev:1;)
+
+# Cross-Site Scripting (XSS) Rules
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible XSS Attack, script tag"; flow:to_server,established; content:"<script>"; http_client_body; classtype:web-application-attack; sid:300601; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible XSS Attack, alert function"; flow:to_server,established; content:"alert("; http_client_body; classtype:web-application-attack; sid:300602; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible XSS Attack, document.write function"; flow:to_server,established; content:"document.write("; http_client_body; classtype:web-application-attack; sid:300603; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible XSS Attack, onmouseover event"; flow:to_server,established; content:"onmouseover"; http_client_body; classtype:web-application-attack; sid:300604; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible XSS Attack, onerror event"; flow:to_server,established; content:"onerror"; http_client_body; classtype:web-application-attack; sid:300605; rev:1;)
+
+alert http any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Possible XSS Attack, onload event"; flow:to_server,established; content:"onload"; http_client_body; classtype:web-application-attack; sid:300606; rev:1;)
