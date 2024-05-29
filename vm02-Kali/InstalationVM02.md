@@ -1,3 +1,4 @@
+# VM02 - Kali atacante
 ## 1. Instalación de ubuntu-server
 Instalar ubuntu-server 22.04.4 y actualizar el sistema operativo.
 ```bash

@@ -1,3 +1,4 @@
+# VM00 - Suricata
 ## 1. Instalación de ubuntu-server
 Instalar ubuntu-server 22.04.3 y actualizar el sistema operativo.
 ```bash
@@ -172,7 +173,7 @@ Ahora, los eventos llevarán un ID como `1:S+3BA2UmrHK0Pk+u3XH78GAFTtQ=` que se 
 Buscamos la línea `af-packet:` alrededor de la línea número 580. Bajo ella, establecemos el valor y variables de las interfaces que se van a monitorear, en este caso quedará como lo siguiente.
 ```yml
   - interface: ens19
-	threads: auto
+    threads: auto
     cluster-id: 99
     cluster-type: cluster_flow
     defrag: yes
@@ -184,7 +185,7 @@ Buscamos la línea `af-packet:` alrededor de la línea número 580. Bajo ella, e
     defrag: yes
 
   - interface: ens21
-	threads: auto
+    threads: auto
     cluster-id: 97
     cluster-type: cluster_flow
     defrag: yes

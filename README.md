@@ -11,10 +11,10 @@ Este repositorio contiene todos los archivos y configuraciones necesarios para l
 - **Elastalert2:** Herramienta para la creación de alertas basadas en reglas en Elasticsearch.
 
 El laboratorio está compuesto por cuatro máquinas virtuales que simulan el entorno de prueba:
-- `vm00 - Suricata`: Máquina que corre Suricata para la detección de amenazas en la red.
-- `vm01 - Elastic server`: Máquina que corre Elasticsearch y Kibana para el almacenamiento y visualización de datos.
-- `vm02 - Kali atacante`: Máquina que simula al atacante, utilizando Kali Linux.
-- `vm03 - Web server víctima`: Máquina que actúa como servidor web víctima de los ataques.
+- `VM00 - Suricata`: Máquina que corre Suricata para la detección de amenazas en la red.
+- `VM01 - Elastic server`: Máquina que corre Elasticsearch y Kibana para el almacenamiento y visualización de datos.
+- `VM02 - Kali atacante`: Máquina que simula al atacante, utilizando Kali Linux.
+- `VM03 - Web server víctima`: Máquina que actúa como servidor web víctima de los ataques.
 
 Dentro de cada carpeta de cada máquina, se encuentra un archivo `.md` que explica cómo instalar y configurar cada componente para que todo el sistema funcione correctamente.
 
@@ -36,6 +36,7 @@ Navega a cada carpeta (vm00, vm01, vm02, vm03) y sigue las instrucciones detalla
     - vm03 - Web server víctima: Sigue las instrucciones para configurar el servidor web que será atacado.
 
 4. **Ejecución del sistema:**
+
 1. Inicia todas las máquinas virtuales.
 2. Realiza los ataques desde vm02 - Kali atacante hacia vm03 - Web server víctima.
 3. Monitorea y analiza las alertas generadas por Suricata en vm00 y visualiza los datos en vm01.

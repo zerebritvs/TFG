@@ -1,3 +1,4 @@
+# VM03 - Web server víctima
 ## 1. Instalación de ubuntu-server
 Instalar ubuntu-server 22.04.4 y actualizar el sistema operativo.
 ```bash
@@ -76,16 +77,16 @@ docker run --rm -it -p 80:80 vulnerables/web-dvwa
 
 Para acceder a la aplicación desde una máquina de la misma red ponemos en el navegador la url `http://192.168.1.23`.
 Nos saldrá un panel de login para acceder a la aplicación web introducimos el usuario `admin` y la contraseña `password`.
-![Alt text](https://github.com/zerebritvs/TFG/tree/main/images/dvwaLogin.png?raw=true "DVWA Login")
+![DVWA Login](https://github.com/zerebritvs/TFG/tree/main/images/dvwaLogin.png)
 
 Entramos en la web y seleccionamos el botón que aparece abajo del todo `Create / Reset Database` para inicializar la base de datos.
-![Alt text](https://github.com/zerebritvs/TFG/tree/main/images/dvwaSetup.png?raw=true "DVWA Setup")
+![DVWA Setup](https://github.com/zerebritvs/TFG/tree/main/images/dvwaSetup.png)
 
 Nos sacará de la web y nos volverá a pedir las credenciales anteriores en el panel de login.
-![Alt text](https://github.com/zerebritvs/TFG/tree/main/images/dvwaLogin.png?raw=true "DVWA Login")
+![DVWA Login](https://github.com/zerebritvs/TFG/tree/main/images/dvwaLogin.png)
 
 Y ya estaremos dentro de la aplicación web lista para funcionar.
-![Alt text](https://github.com/zerebritvs/TFG/tree/main/images/dvwaHome.png?raw=true "DVWA Home")
+![DVWA Home](https://github.com/zerebritvs/TFG/tree/main/images/dvwaHome.png)
 
 Para que no salga esto en File Inclusion (`allow_url_include`): 
 ```bash

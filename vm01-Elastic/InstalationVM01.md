@@ -1,3 +1,4 @@
+# VM01 - Elastic server
 ## 1. Instalación de ubuntu-server
 Instalar ubuntu-server 22.04.4 y actualizar el sistema operativo.
 ```bash
@@ -416,13 +417,13 @@ bfa28b64b8f5   jertel/elastalert2:2.17.0                              "/opt/elas
 ```
 
 Si accedemos a la página de `kibana` nos aparece un panel de inicio de sesión, donde se introducirán las credenciales de elastic.
-![Alt text](https://github.com/zerebritvs/TFG/tree/main/images/elasticLogin.png?raw=true "Kibana Login")
+![Kibana Login](https://github.com/zerebritvs/TFG/tree/main/images/elasticLogin.png)
 
 Una vez introducidas las credenciales de elastic podemos observar que estamos dentro de kibana y todo funciona correctamente.
-![Alt text](https://github.com/zerebritvs/TFG/tree/main/images/elasticHome.png?raw=true "Kibana Home")
+![Kibana Home](https://github.com/zerebritvs/TFG/tree/main/images/elasticHome.png)
 
 Para configurar la contraseña de GMAIL para SMTP para que funcione sin problemas elastalert2 es necesario añadir una `App password`.
-![Alt text](https://github.com/zerebritvs/TFG/tree/main/images/appPassword.png?raw=true "App password GMAIL")
+![App password GMAIL](https://github.com/zerebritvs/TFG/tree/main/images/appPassword.png)
 
 Para copiar del contenedor de elasticsearch al host el `ca.crt` que necesitaremos pasar a la máquina donde estará instalado `Filebeat`.
 ```bash
