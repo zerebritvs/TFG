@@ -36,10 +36,9 @@ Navega a cada carpeta (vm00, vm01, vm02, vm03) y sigue las instrucciones detalla
     - vm03 - Web server víctima: Sigue las instrucciones para configurar el servidor web que será atacado.
 
 4. **Ejecución del sistema:**
-
-1. Inicia todas las máquinas virtuales.
-2. Realiza los ataques desde vm02 - Kali atacante hacia vm03 - Web server víctima.
-3. Monitorea y analiza las alertas generadas por Suricata en vm00 y visualiza los datos en vm01.
+    1. Inicia todas las máquinas virtuales.
+    2. Realiza los ataques desde vm02 - Kali atacante hacia vm03 - Web server víctima.
+    3. Monitorea y analiza las alertas generadas por Suricata en vm00 y visualiza los datos en vm01.
 
 ## Contribución
 ¡Tu contribución es bienvenida! Si deseas mejorar este proyecto, por favor sigue estos pasos:

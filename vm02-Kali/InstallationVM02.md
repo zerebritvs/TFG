@@ -7,7 +7,7 @@ sudo apt upgrade
 ```
 
 ## 2. Configuración de red
-Editamos el fichero de configuración de red `/etc/network/interfaces` para que tenga el siguiente contenido:
+Editamos el fichero de configuración de red `/etc/network/interfaces` para que tenga el siguiente contenido.
 ```bash
 auto lo
 iface lo inet loopback
@@ -28,7 +28,7 @@ Reiniciamos el servicio de red para aplicar los cambios realizados.
 sudo systemctl restart networking.service
 ```
 
-Deberíamos de tener la siguiente configuración de red:
+Deberíamos de tener la siguiente configuración de red.
 ```bash
 root@vm03:~# ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000

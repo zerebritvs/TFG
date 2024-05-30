@@ -75,18 +75,18 @@ Para desplegar el servidor web vulnerable con docker utilizamos el siguiente com
 docker run --rm -it -p 80:80 vulnerables/web-dvwa
 ```
 
-Para acceder a la aplicación desde una máquina de la misma red ponemos en el navegador la url `http://192.168.1.23`.
+Para acceder a la aplicación desde una máquina de la misma red ponemos en el navegador la url `http://10.2.2.3`.
 Nos saldrá un panel de login para acceder a la aplicación web introducimos el usuario `admin` y la contraseña `password`.
-![DVWA Login](https://github.com/zerebritvs/TFG/tree/main/images/dvwaLogin.png)
+![DVWA Login](../images/dvwaLogin.png)
 
 Entramos en la web y seleccionamos el botón que aparece abajo del todo `Create / Reset Database` para inicializar la base de datos.
-![DVWA Setup](https://github.com/zerebritvs/TFG/tree/main/images/dvwaSetup.png)
+![DVWA Setup](../images/dvwaSetup.png)
 
 Nos sacará de la web y nos volverá a pedir las credenciales anteriores en el panel de login.
-![DVWA Login](https://github.com/zerebritvs/TFG/tree/main/images/dvwaLogin.png)
+![DVWA Login](../images/dvwaLogin.png)
 
 Y ya estaremos dentro de la aplicación web lista para funcionar.
-![DVWA Home](https://github.com/zerebritvs/TFG/tree/main/images/dvwaHome.png)
+![DVWA Home](../images/dvwaHome.png)
 
 Para que no salga esto en File Inclusion (`allow_url_include`): 
 ```bash

@@ -124,7 +124,7 @@ KB_MEM_LIMIT=2147483648
 ENCRYPTION_KEY=345d578f69bc0e217333076f441f120bc6bdf37101ae19eb05aac9d3cbe026c1
 ```
 
-Creamos el archivo `docker-compose.yaml`, que despliega los contenedores de ELK.
+Creamos el archivo `docker-compose.yaml`, que despliega los contenedores de elasticsearch, kibana y elastalert2.
 ```yaml
 version: "2"
 
@@ -417,20 +417,20 @@ bfa28b64b8f5   jertel/elastalert2:2.17.0                              "/opt/elas
 ```
 
 Si accedemos a la página de `kibana` nos aparece un panel de inicio de sesión, donde se introducirán las credenciales de elastic.
-![Kibana Login](https://github.com/zerebritvs/TFG/tree/main/images/elasticLogin.png)
+![Kibana Login](../images/elasticLogin.png)
 
 Una vez introducidas las credenciales de elastic podemos observar que estamos dentro de kibana y todo funciona correctamente.
-![Kibana Home](https://github.com/zerebritvs/TFG/tree/main/images/elasticHome.png)
+![Kibana Home](../images/elasticHome.png)
 
 Para configurar la contraseña de GMAIL para SMTP para que funcione sin problemas elastalert2 es necesario añadir una `App password`.
-![App password GMAIL](https://github.com/zerebritvs/TFG/tree/main/images/appPassword.png)
+![App password GMAIL](../images/appPassword.png)
 
 Para copiar del contenedor de elasticsearch al host el `ca.crt` que necesitaremos pasar a la máquina donde estará instalado `Filebeat`.
 ```bash
 docker cp elasticsearch:/usr/share/elasticsearch/config/certs/ca/ca.crt ./ca.crt
 ```
 
-Para limpiar los logs de docker de un contenedor específico:
+Para limpiar los logs de docker de un contenedor específico.
 ```bash
 : > $(docker inspect --format='{{.LogPath}}' <container_name_or_id>)
 ```
