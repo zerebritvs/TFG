@@ -1,0 +1,51 @@
+name: Suricata LFI Alert
+index: ".ds-filebeat-*"
+type: any
+
+realert:
+    minutes: 5
+
+filter:
+- range:
+    suricata.eve.alert.signature_id:
+        from: 200001
+        to: 200010
+
+alert:
+- "email"
+
+email:
+- "juapage13@gmail.com"
+
+smtp_host: "smtp.gmail.com"
+smtp_port: 587
+smtp_ssl: false
+from_addr: "juapage13@gmail.com"
+smtp_auth_file: "/opt/elastalert/smtp_auth.yaml"
+
+email_format: "html"
+alert_subject: "SURICATA LFI ALERT"
+alert_text_type: alert_text_only
+alert_text_args:
+- "@timestamp"
+- "suricata.eve.alert.signature"
+- "suricata.eve.alert.signature_id"
+- "suricata.eve.alert.category"
+- "destination.ip"
+alert_text: |
+  <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;'>
+      <div style='background-color: #fff; border: 2px solid #e74c3c; border-radius: 10px; padding: 20px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); max-width: auto; max-height: 600px; text-align: left;'>
+          <h2 style='color: #e74c3c; font-size: 2.5em; margin-bottom: 30px;'>¡Alerta de Suricata!</h2>
+          <p style='font-size: 1.5em; margin-bottom: 20px;'>Se ha detectado un intento de ataque <b>Local File Inclusion (LFI)</b> en el sistema.</p>
+          <p style='font-size: 1.5em; margin-bottom: 20px;'>La información sobre el incidente es la siguiente:</p>
+          <ul style='list-style: none; padding: 0;'>
+              <li style='font-size: 1.4em; background: #e74c3c; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px;'>Timestamp: {0}</li>
+              <li style='font-size: 1.4em; background: #e74c3c; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px;'>Rule name: {1}</li>
+              <li style='font-size: 1.4em; background: #e74c3c; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px;'>Rule SID: {2}</li>
+              <li style='font-size: 1.4em; background: #e74c3c; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px;'>Category: {3}</li>
+              <li style='font-size: 1.4em; background: #e74c3c; color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px;'>Host affected: {4}</li>
+          </ul>
+          <p style='font-size: 1.5em; margin-bottom: 20px;'>Consulta los registros desde <i>Kibana</i> para obtener más información:</p>
+          <li><a href='http://vm4801.virtual.lab.inf.uva.es' style='color: #3498db; text-decoration: none; font-size: 1.5em;'>http://vm4801.virtual.lab.inf.uva.es</a></li>
+      </div>
+  </body>
