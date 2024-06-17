@@ -18,6 +18,8 @@ El laboratorio está compuesto por cuatro máquinas virtuales que simulan el ent
 
 Dentro de cada carpeta de cada máquina, se encuentra un archivo `.md` que explica cómo instalar y configurar cada componente para que todo el sistema funcione correctamente.
 
+Por otra parte en la carpeta `Simulations` vienen explicadas las 5 simulaciones de ataques que se han realizado para probar el sistema.
+
 ## Instrucciones de uso
 Para replicar este laboratorio, sigue los siguientes pasos:
 

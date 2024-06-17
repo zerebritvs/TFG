@@ -1,4 +1,4 @@
-version: "3.8"
+version: "2"
 
 volumes:
   certs:
@@ -47,7 +47,7 @@ services:
           "      - localhost\n"\
           "    ip:\n"\
           "      - 127.0.0.1\n"\
-          "      - ${CLUSTER_IP}\n"\
+          "      - ${FILEBEAT_BAY}\n"\
           "  - name: kibana\n"\
           "    dns:\n"\
           "      - kibana\n"\
@@ -87,7 +87,7 @@ services:
       - certs:/usr/share/elasticsearch/config/certs
       - elasticsearchdata:/usr/share/elasticsearch/data
     ports:
-      - ${ES_PORT}:9200
+      - ${FILEBEAT_BAY}:${ES_PORT}:9200
     environment:
       - node.name=elasticsearch
       - cluster.name=${CLUSTER_NAME}

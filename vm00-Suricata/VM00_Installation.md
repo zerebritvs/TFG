@@ -78,6 +78,8 @@ usuario@vm00:~$ ip a
     inet 10.2.2.80/24 brd 10.2.2.255 scope global ens22
        valid_lft forever preferred_lft forever
 ```
+Cabe destacar que para hacer que esto funcione en PROXMOX VE en la interfaz ens19, se tuvo que aplicar un script de **Bridge Port Mirroring** para garantizar que todos los paquetes vayan a esta interfaz, todo ello viene explicado en esta web ![Port Mirroring Bridge](https://codingpackets.com/blog/proxmox-vm-bridge-port-mirror/).
+
 ## 3. Instalar Suricata
 Para instalar Suricata, primero hay que añadir el repositorio de paquetes de la Open Information Security Foundation (OISF) al servidor.
 ```bash 
