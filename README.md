@@ -16,6 +16,8 @@ El laboratorio está compuesto por cuatro máquinas virtuales que simulan el ent
 - `VM02 - Kali atacante`: Máquina que simula al atacante, utilizando Kali Linux.
 - `VM03 - Web server víctima`: Máquina que actúa como servidor web víctima de los ataques.
 
+![Arquitectura de red](./images/arquitecturaRed.png)
+
 Dentro de cada carpeta de cada máquina, se encuentra un archivo `.md` que explica cómo instalar y configurar cada componente para que todo el sistema funcione correctamente.
 
 Por otra parte en la carpeta `Simulations` vienen explicadas las 5 simulaciones de ataques que se han realizado para probar el sistema.
