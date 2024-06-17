@@ -101,8 +101,7 @@ Además creo el fichero `smtp_auth.yaml` donde están las credenciales para cone
 
 Después creamos otra carpeta dentro de `~/elk/elastalert2` para almacenar las reglas de elastalert2 `mkdir rules`.
 
-Dentro de la carpeta `~/elk/elastalert2/rules` creo el fichero que define una regla para elastalert2 llamado `suricata_alert_rule.yaml`.
-![Fichero configuración suricata_alert_rule.yaml](../vm01-Elastic/elastalert2/suricata_alert_rule.yaml)
+Dentro de la carpeta `~/elk/elastalert2/rules` creamos los ficheros que definen unas reglas personalizadas para elastalert2.
 
 Para que los contenedores se desplieguen tal y como viene definido en el archivo `docker-compose.yml` ejecutamos el siguiente comando.
 ```bash
